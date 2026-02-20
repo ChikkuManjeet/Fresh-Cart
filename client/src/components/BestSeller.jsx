@@ -1,0 +1,26 @@
+import React, { useContext } from 'react'
+import { AppContext } from '../context/AppContext'
+import ProductCard from './ProductCard'
+
+const BestSeller = () => {
+  const { products } = useContext(AppContext)
+
+  return (
+    <div className="mt-16">
+      <p className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-gray-800 drop-shadow-md leading-snug">
+          Best <span className="text-yellow-400">Sellers</span>
+      </p>
+      
+      <div className=" my-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  lg:grid-cols-5 gap-4 items-center justify-center">
+        {products
+          .filter((product) => product.inStock)  
+          .slice(0, 5)
+          .map((product) => (
+            <ProductCard key={product.id || product._id} product={product} />
+          ))}
+      </div>
+    </div>
+  )
+}
+
+export default BestSeller
